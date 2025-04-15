@@ -1,3 +1,8 @@
+import streamlit as st
+
+st.set_page_config(page_title="Dashboard Produksi", layout="centered")
+st.title("Estimasi Jumlah Produksi")
+
 suhu = 20
 pencahayaan = 400
 kebisingan = 55
@@ -107,7 +112,10 @@ hasil_suhu = max(nilai_suhu, key=nilai_suhu.get)
 hasil_pencahayaan = max(nilai_pencahayaan, key=nilai_pencahayaan.get)
 hasil_kebisingan = max(nilai_kebisingan, key=nilai_kebisingan.get)
 
-print("Suhu: "+hasil_suhu)
-print("Pencahayaan: "+hasil_pencahayaan)
-print("Kebisingan: "+hasil_kebisingan)
-print(f"Produksi: {produksi}")
+st.subheader("Hasil Produksi")
+st.metric(label="Jumlah Estimasi", value=f"{produksi} unit")
+
+st.subheader("Hasil Parameter")
+st.write(f"**Suhu ({suhu}°C):** {hasil_suhu}")
+st.write(f"**Pencahayaan ({pencahayaan} lux):** {hasil_pencahayaan}")
+st.write(f"**Kebisingan ({kebisingan} dB):** {hasil_kebisingan}")
