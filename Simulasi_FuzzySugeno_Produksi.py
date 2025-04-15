@@ -3,6 +3,7 @@ import streamlit as st
 st.set_page_config(page_title="Dashboard Produksi", layout="centered")
 st.title("Estimasi Jumlah Produksi")
 st.markdown("Simulasi Fuzzy Sugeno estimasi jumlah produki berdasarkan suhu, pencahayaan, dan kebisingan.")
+st.markdown("P31.2024.02644 - Muhammad Budi Hartanto")
 
 #suhu = 20
 #pencahayaan = 400
