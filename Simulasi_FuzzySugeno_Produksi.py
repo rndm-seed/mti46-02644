@@ -174,7 +174,7 @@ st.write(f"**Pencahayaan ({pencahayaan} lux):** {hasil_pencahayaan}")
 st.write(f"**Kebisingan ({kebisingan} dB):** {hasil_kebisingan}")
 
 st.markdown("---")
-st.subheader("Simulasi Kenyamanan Ruangan"):
+st.subheader("Simulasi Kenyamanan Ruangan")
 st.metric(label="Skor Kenyamanan", value=f"{kenyamanan}")
 
 if kenyamanan >= 80:
