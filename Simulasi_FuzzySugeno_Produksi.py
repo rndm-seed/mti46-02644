@@ -161,6 +161,8 @@ hasil_suhu = max(nilai_suhu, key=nilai_suhu.get)
 hasil_pencahayaan = max(nilai_pencahayaan, key=nilai_pencahayaan.get)
 hasil_kebisingan = max(nilai_kebisingan, key=nilai_kebisingan.get)
 
+#Show output
+
 st.markdown("---")
 st.subheader("Hasil Produksi")
 st.metric(label="Jumlah Estimasi", value=f"{produksi} unit")
