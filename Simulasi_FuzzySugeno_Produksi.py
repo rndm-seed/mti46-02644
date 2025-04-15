@@ -107,12 +107,55 @@ def compute_output():
     temp2 = 0
     for s, p, k in product(nilai_suhu.keys(), nilai_pencahayaan.keys(), nilai_kebisingan.keys()):
         hasil = nilai_suhu[s] * nilai_pencahayaan[p] * nilai_kebisingan[k]
-        jumlah = produksi_rules.get((s, p, k), 140)  #140 nilai default
+        jumlah = produksi_rules.get((s, p, k), 140)  #default skor
         temp1 += hasil * jumlah
         temp2 += hasil
-    return temp1 / temp2
+    return temp1 / temp2 != 0 else 0
 
 produksi = round(compute_output(), 2)
+
+kenyamanan_rules = {
+    # Format: ('Suhu', 'Pencahayaan', 'Kebisingan'): Skor kenyamanan 0-100
+    ('Rendah', 'Redup', 'Tenang'): 65,
+    ('Rendah', 'Redup', 'Agak Bising'): 60,
+    ('Rendah', 'Redup', 'Bising'): 35,
+    ('Rendah', 'Agak Terang', 'Tenang'): 70,
+    ('Rendah', 'Agak Terang', 'Agak Bising'): 65,
+    ('Rendah', 'Agak Terang', 'Bising'): 40,
+    ('Rendah', 'Terang', 'Tenang'): 68,
+    ('Rendah', 'Terang', 'Agak Bising'): 60,
+    ('Rendah', 'Terang', 'Bising'): 38,
+    ('Normal', 'Redup', 'Tenang'): 75,
+    ('Normal', 'Redup', 'Agak Bising'): 65,
+    ('Normal', 'Redup', 'Bising'): 40,
+    ('Normal', 'Agak Terang', 'Tenang'): 85,
+    ('Normal', 'Agak Terang', 'Agak Bising'): 80,
+    ('Normal', 'Agak Terang', 'Bising'): 45,
+    ('Normal', 'Terang', 'Tenang'): 88,
+    ('Normal', 'Terang', 'Agak Bising'): 80,
+    ('Normal', 'Terang', 'Bising'): 50,
+    ('Tinggi', 'Redup', 'Tenang'): 40,
+    ('Tinggi', 'Redup', 'Agak Bising'): 35,
+    ('Tinggi', 'Redup', 'Bising'): 30,
+    ('Tinggi', 'Agak Terang', 'Tenang'): 45,
+    ('Tinggi', 'Agak Terang', 'Agak Bising'): 40,
+    ('Tinggi', 'Agak Terang', 'Bising'): 30,
+    ('Tinggi', 'Terang', 'Tenang'): 50,
+    ('Tinggi', 'Terang', 'Agak Bising'): 45,
+    ('Tinggi', 'Terang', 'Bising'): 30,
+}
+
+def compute_kenyamanan():
+    temp1 = 0
+    temp2 = 0
+    for s, p, k in product(nilai_suhu.keys(), nilai_pencahayaan.keys(), nilai_kebisingan.keys()):
+        derajat = nilai_suhu[s] * nilai_pencahayaan[p] * nilai_kebisingan[k]
+        score = kenyamanan_rules.get((s, p, k), 50)  # default skor 50
+        temp1 += derajat * score
+        temp2 += derajat
+    return temp1 / temp2 if temp2 != 0 else 0
+    
+kenyamanan = round(compute_kenyamanan(), 2)
 
 hasil_suhu = max(nilai_suhu, key=nilai_suhu.get)
 hasil_pencahayaan = max(nilai_pencahayaan, key=nilai_pencahayaan.get)
@@ -127,6 +170,19 @@ st.subheader("Hasil Parameter")
 st.write(f"**Suhu ({suhu}°C):** {hasil_suhu}")
 st.write(f"**Pencahayaan ({pencahayaan} lux):** {hasil_pencahayaan}")
 st.write(f"**Kebisingan ({kebisingan} dB):** {hasil_kebisingan}")
+
+st.markdown("---")
+st.subheader("Simulasi Kenyamanan Ruangan"):
+st.metric(label="Skor Kenyamanan", value=f"{kenyamanan}")
+
+if kenyamanan >= 80:
+    st.success("Kondisi sangat nyaman 😊")
+elif kenyamanan >= 60:
+    st.info("Kondisi cukup nyaman 😌")
+elif kenyamanan >= 40:
+    st.warning("Kondisi kurang nyaman 😕")
+else:
+    st.error("Kondisi tidak nyaman 😢")
 
 st.markdown("---")
 st.subheader("Perhitungan Nilai")
