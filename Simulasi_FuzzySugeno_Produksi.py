@@ -162,29 +162,32 @@ hasil_pencahayaan = max(nilai_pencahayaan, key=nilai_pencahayaan.get)
 hasil_kebisingan = max(nilai_kebisingan, key=nilai_kebisingan.get)
 
 #Show output
-
 st.markdown("---")
-st.subheader("Hasil Produksi")
-st.metric(label="Jumlah Estimasi", value=f"{produksi} unit")
+col1, col2 = st.columns(2)
+
+with col1:
+    st.subheader("Hasil Produksi")
+    st.metric(label="Jumlah Estimasi", value=f"{produksi} unit")
+
+with col2:
+    st.subheader("Skor Kenyamanan")
+    st.metric(label="Skor Kenyamanan", value=f"{kenyamanan}")
+
+    if kenyamanan >= 80:
+        st.success("Kondisi sangat nyaman 😊")
+    elif kenyamanan >= 60:
+        st.info("Kondisi cukup nyaman 😌")
+    elif kenyamanan >= 40:
+        st.warning("Kondisi kurang nyaman 😕")
+    else:
+        st.error("Kondisi tidak nyaman 😢")
+
 
 st.markdown("---")
 st.subheader("Hasil Parameter")
 st.write(f"**Suhu ({suhu}°C):** {hasil_suhu}")
 st.write(f"**Pencahayaan ({pencahayaan} lux):** {hasil_pencahayaan}")
 st.write(f"**Kebisingan ({kebisingan} dB):** {hasil_kebisingan}")
-
-st.markdown("---")
-st.subheader("Simulasi Kenyamanan Ruangan")
-st.metric(label="Skor Kenyamanan", value=f"{kenyamanan}")
-
-if kenyamanan >= 80:
-    st.success("Kondisi sangat nyaman 😊")
-elif kenyamanan >= 60:
-    st.info("Kondisi cukup nyaman 😌")
-elif kenyamanan >= 40:
-    st.warning("Kondisi kurang nyaman 😕")
-else:
-    st.error("Kondisi tidak nyaman 😢")
 
 st.markdown("---")
 st.subheader("Perhitungan Nilai")
