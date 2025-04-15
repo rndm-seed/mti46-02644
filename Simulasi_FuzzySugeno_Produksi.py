@@ -2,10 +2,16 @@ import streamlit as st
 
 st.set_page_config(page_title="Dashboard Produksi", layout="centered")
 st.title("Estimasi Jumlah Produksi")
+st.markdown("Simulasi Fuzzy Sugeno estimasi jumlah produki berdasarkan suhu, pencahayaan, dan kebisingan.")
 
-suhu = 20
-pencahayaan = 400
-kebisingan = 55
+#suhu = 20
+#pencahayaan = 400
+#kebisingan = 55
+
+#Input
+suhu = st.slider("Suhu (°C)", 18, 38, 25)
+pencahayaan = st.slider("Pencahayaan (lux)", 0, 700, 350)
+kebisingan = st.slider("Kebisingan (dB)", 35, 105, 65)
 
 def data_suhu(x):
     # Rendah
@@ -112,9 +118,11 @@ hasil_suhu = max(nilai_suhu, key=nilai_suhu.get)
 hasil_pencahayaan = max(nilai_pencahayaan, key=nilai_pencahayaan.get)
 hasil_kebisingan = max(nilai_kebisingan, key=nilai_kebisingan.get)
 
+st.markdown("---")
 st.subheader("Hasil Produksi")
 st.metric(label="Jumlah Estimasi", value=f"{produksi} unit")
 
+st.markdown("---")
 st.subheader("Hasil Parameter")
 st.write(f"**Suhu ({suhu}°C):** {hasil_suhu}")
 st.write(f"**Pencahayaan ({pencahayaan} lux):** {hasil_pencahayaan}")
