@@ -112,7 +112,7 @@ def compute_output():
         temp2 += hasil
     return temp1 / temp2
 
-produksi = compute_output()
+produksi = round(compute_output(), 2)
 
 hasil_suhu = max(nilai_suhu, key=nilai_suhu.get)
 hasil_pencahayaan = max(nilai_pencahayaan, key=nilai_pencahayaan.get)
@@ -127,3 +127,9 @@ st.subheader("Hasil Parameter")
 st.write(f"**Suhu ({suhu}°C):** {hasil_suhu}")
 st.write(f"**Pencahayaan ({pencahayaan} lux):** {hasil_pencahayaan}")
 st.write(f"**Kebisingan ({kebisingan} dB):** {hasil_kebisingan}")
+
+st.markdown("---")
+st.subheader("Perhitungan Nilai")
+st.write(f"**Suhu ({suhu}°C):** {nilai_suhu}")
+st.write(f"**Pencahayaan ({pencahayaan} lux):** {nilai_pencahayaan}")
+st.write(f"**Kebisingan ({kebisingan} dB):** {nilai_kebisingan}")
