@@ -3,7 +3,6 @@ import streamlit as st
 st.set_page_config(page_title="Dashboard Produksi", layout="centered")
 st.title("Estimasi Jumlah Produksi")
 st.markdown("Simulasi Fuzzy Sugeno estimasi jumlah produki berdasarkan suhu, pencahayaan, dan kebisingan.")
-st.markdown("P31.2024.02644 - Muhammad Budi Hartanto")
 
 #suhu = 20
 #pencahayaan = 400
@@ -134,3 +133,6 @@ st.subheader("Perhitungan Nilai")
 st.write(f"**Suhu ({suhu}°C):** {nilai_suhu}")
 st.write(f"**Pencahayaan ({pencahayaan} lux):** {nilai_pencahayaan}")
 st.write(f"**Kebisingan ({kebisingan} dB):** {nilai_kebisingan}")
+
+st.markdown("---")
+st.markdown("P31.2024.02644 - Muhammad Budi Hartanto")
