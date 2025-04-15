@@ -110,7 +110,7 @@ def compute_output():
         jumlah = produksi_rules.get((s, p, k), 140)  #default skor
         temp1 += hasil * jumlah
         temp2 += hasil
-    return temp1 / temp2 != 0 else 0
+    return temp1 / temp2 if temp2 != 0 else 0
 
 produksi = round(compute_output(), 2)
 
